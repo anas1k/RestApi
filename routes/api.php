@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+ */
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('signin', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout');
+    Route::post('refresh', 'refresh');
+});
+
+// Route::apiResource('articles', ArticleController::class);
+Route::controller(ArticleController::class)->group(function () {
+    Route::get('articles', 'index');
+    Route::post('articles/add', 'store');
+    Route::put('articles/{id}', 'update');
+    Route::post('articles/delete', 'destroy');
 });
