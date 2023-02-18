@@ -28,10 +28,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 });
 
-// Route::apiResource('articles', ArticleController::class);
-Route::controller(ArticleController::class)->group(function () {
+Route::apiResource('articles', ArticleController::class);
+/* Route::controller(ArticleController::class)->group(function () {
+    Route::get('articles/{id}', 'show');
     Route::get('articles', 'index');
     Route::post('articles/add', 'store');
-    Route::put('articles/{id}', 'update');
+    Route::put('articles/edit{id}', 'update');
     Route::post('articles/delete', 'destroy');
-});
+}); */
