@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('category')->nullable(false);
             $table->date('published_at')->nullable(false);
             $table->timestamps();
+            // to create foreign key
+            // $table->bigInteger('role_id')->unsigned()->index()->nullable();
+            // $table->foreign('role_id')->references('id')->on('roles');
+
         });
     }
 
