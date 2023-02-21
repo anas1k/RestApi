@@ -36,3 +36,12 @@ Route::apiResource('articles', ArticleController::class);
     Route::put('articles/edit{id}', 'update');
     Route::post('articles/delete', 'destroy');
 }); */
+
+// Route::controller(CommentController::class)->group(function () {
+//     Route::get('comments', 'index');
+//     Route::post('comments', 'store');
+//     Route::get('comments/{comment}', 'show');
+//     // Route::put('comments/{comment}', 'update');
+//     Route::delete('comments/{comment}', 'destroy');
+//     // Route::get('comments/article/{comment}', 'showComments');
+// })->middleware('auth:api');
