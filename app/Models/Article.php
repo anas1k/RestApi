@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\ArticleObserver;
 
 class Article extends Model
 {
@@ -16,4 +17,9 @@ class Article extends Model
         'category',
         'published_at'
     ];
+    public static function boot()
+    {
+        parent::boot();
+        self::observe(new ArticleObserver);
+    }
 }
