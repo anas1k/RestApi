@@ -26,9 +26,9 @@ class StoreArticleRequest extends FormRequest
         return [
             'title' => 'required|max:30',
             'content' => 'required',
-            'author' => 'required',
+            // 'author' => 'required',
             'category' => 'required',
-            'published_at' => 'required|date',
+            // 'published_at' => 'required|date',
         ];
     }
 }

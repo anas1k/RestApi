@@ -43,7 +43,13 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        $article = Article::create($request->all());
+        $article = Article::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'category' => $request->category,
+            'author' => $request->user()->name,
+            'published_at' => now(),
+        ]);
 
         return response()->json([
             'status' => true,

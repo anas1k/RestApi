@@ -1,27 +1,24 @@
 <?php
 
-
 namespace App\Notifications;
-
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewArticleNotification extends Notification implements ShouldQueue
+class DailyArticleNotification extends Notification
 {
     use Queueable;
-    private $article;
-
+    protected $articles;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($article)
+    public function __construct($articles)
     {
-        $this->article = $article;
+        $this->articles = $articles;
     }
 
     /**
@@ -30,7 +27,7 @@ class NewArticleNotification extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via(mixed $notifiable): array
+    public function via($notifiable)
     {
         return ['mail'];
     }
@@ -43,13 +40,7 @@ class NewArticleNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-            ->subject('New Article')
-            ->from('Support@api.com')
-            ->greeting('New Article posted !')
-            ->line("{$this->article->title} has published a new article.")
-            ->line("This was published on {$this->article->published_at}.")
-            ->line("their email is {$this->article->author} if you need to organise anything.");
+        return (new MailMessage)->markdown('mails.daily-article', ['articles' => $this->articles]);
         // ->line('The introduction to the notification.')
         // ->action('Notification Action', url('/'))
         // ->line('Thank you for using our application!');
